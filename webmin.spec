@@ -16,7 +16,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.320
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -35,6 +35,8 @@ Source10:	webmin.pam
 Source11:	webmin-16.png
 Source12:	webmin-32.png
 Source13:	webmin-48.png
+# uses include instead of pam_stack
+Source14:	webmin.pam-new
 # (gc) have the updates; this needs to change for each version and/or release, see
 #      http://www.webmin.com/webmin/updates.html
 # (eandry) -- 2 updates for 1.290 as of Fri Jul 14 14:00:00 CEST 2006
@@ -190,7 +192,12 @@ install -m755 %{SOURCE4} %{buildroot}/usr/share/webmin/postinstall.sh
 install -m755 %{SOURCE5} %{buildroot}/usr/bin
 
 mkdir -p %{buildroot}/%{_sysconfdir}/pam.d
+
+%if %{mdkversion} < 200610 
 install -m755 %{SOURCE10} %{buildroot}/%{_sysconfdir}/pam.d/webmin
+%else
+install -m755 %{SOURCE14} %{buildroot}/%{_sysconfdir}/pam.d/webmin
+%endif
 
 rm -rf %{buildroot}/usr/share/webmin/*/{CVS,*/CVS}
 rm -f `find %{buildroot} -type f -name .cvsignore`
@@ -275,7 +282,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-, root, root, 0755)
 %doc README LICENCE
-%config(noreplace) %{_initrddir}/webmin
+%{_initrddir}/webmin
 %config(noreplace) %{_sysconfdir}/pam.d/webmin
 /usr/share/webmin
 /usr/bin/%{name}
@@ -286,5 +293,4 @@ rm -rf %{buildroot}
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_datadir}/applications/*.desktop
-
 
