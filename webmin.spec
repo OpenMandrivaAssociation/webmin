@@ -9,21 +9,20 @@
 %define _enable_debug_packages %{nil}
 %define debug_package          %{nil}
 
-%define i18n_date 20070209
+%define i18n_date 20070604
 %define with_i18n_tarball 1
 %define with_i18n_patch 1
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.320
-Release:	%mkrel 2
+Version:	1.350
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
 Source0:	http://heanet.dl.sourceforge.net/sourceforge/webadmin/%{name}-%{version}.tar.gz
 Source2:	other.modules.tar.bz2
 Source30:	webmin-mandriva-theme.tar.bz2
-Source31:	webmin-mandriva-theme-images.tar.bz2
 # some images were missing
 Source33:	advanced.png
 Source34:	descs.png
@@ -74,7 +73,7 @@ Patch26:	webmin-1.060-mysql-fix-installing-missing-packages.patch
 Patch29:	webmin-1.100-let-localauth-config.patch
 Patch32:	webmin-1.310-usermin-fix-installing-missing-package.diff
 Patch33:	webmin-1.130-postgresql-fix-installing-missing-packages.patch
-Patch34:	webmin-1.310-support-mandriva.diff
+Patch34:	webmin-1.350-support-mandriva.diff
 Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch100:	webmin-i18n-%{i18n_date}.patch
 Requires(pre): rpm-helper
@@ -106,7 +105,12 @@ LOGIN TO "https://localhost:10000/" AND NOT "http://localhost:10000/".
 
 %prep
 
-%setup -q -a 2 -a 20 -a 21 -a 30 -a 31 -a 51 -a 52 -a 53 -a 54 -a 541 -a 55 -a 56 -a 57
+%setup -q -a 2 -a 20 -a 21 -a 30 -a 51 -a 52 -a 53 -a 55 -a 56
+# Unknow extension, rpm won't unpack it.
+tar xf %{SOURCE54}
+tar xf %{SOURCE541}
+tar xf %{SOURCE57}
+
 install -m 0644 %{_sourcedir}/advanced.png mandriva/webmin/images
 install -m 0644 %{_sourcedir}/descs.png mandriva/webmin/images
 rm -fr %{name}-%{version}/dhcpd
@@ -131,7 +135,7 @@ rm -fr %{name}-%{version}/useradmin
 %patch29 -p1
 %patch32 -p0
 %patch33 -p0
-%patch34 -p0
+%patch34 -p1
 %patch35 -p1
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
