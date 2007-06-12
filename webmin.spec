@@ -81,10 +81,6 @@ Requires:	perl
 Requires:	perl-CGI
 Requires:	lsof
 Requires(pre): sed chkconfig findutils fileutils initscripts grep perl-Net_SSLeay perl-Authen-PAM
-%if %mdkversion >= 200700
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
-%endif
 Provides:	%{name}-%{version}
 Provides:	%{name}-theme-mandriva
 Obsoletes:	%{name}-theme-mandriva
@@ -223,6 +219,9 @@ rm -f %{buildroot}/usr/share/webmin/mount/macos-mounts.c
 # (deush) mandriva is the default theme
 echo 'mandriva' > %{buildroot}%{_datadir}/webmin/defaulttheme
 
+# (oe) remove invalid file that breaks webmin
+rm -f %{buildroot}%{_datadir}/webmin/mandriva/config.cgi
+
 # Install icons
 install -d -m 0755 %{buildroot}%{_liconsdir}
 install -d -m 0755 %{buildroot}%{_miconsdir}
@@ -266,9 +265,6 @@ fi
 %preun
 %_preun_service webmin
 %update_menus
-%if %mdkversion >= 200700
-%update_desktop_database
-%endif
 
 %postun
 if [ "$1" = 0 ]; then
@@ -276,9 +272,6 @@ if [ "$1" = 0 ]; then
     rm -rf /etc/webmin /var/webmin /var/lib/webmin /var/run/webmin /var/log/webmin
 fi
 %clean_menus
-%if %mdkversion >= 200700
-%clean_desktop_database
-%endif
 
 %clean
 rm -rf %{buildroot}
