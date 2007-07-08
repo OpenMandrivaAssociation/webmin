@@ -16,7 +16,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.350
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -75,6 +75,7 @@ Patch32:	webmin-1.310-usermin-fix-installing-missing-package.diff
 Patch33:	webmin-1.130-postgresql-fix-installing-missing-packages.patch
 Patch34:	webmin-1.350-support-mandriva.diff
 Patch35:	webmin-1.220-usermin-fix-index.patch
+Patch36:	webmin-1.350-mandriva_theme.diff
 Patch100:	webmin-i18n-%{i18n_date}.patch
 Requires(pre): rpm-helper
 Requires:	perl
@@ -133,6 +134,7 @@ rm -fr %{name}-%{version}/useradmin
 %patch33 -p0
 %patch34 -p1
 %patch35 -p1
+%patch36 -p0
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-9.0; do n=`echo $i | perl -pe 's/...$/9.1/'`; [ -e $n ] || cp $i $n; done
@@ -290,4 +292,3 @@ rm -rf %{buildroot}
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_datadir}/applications/*.desktop
-
