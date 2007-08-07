@@ -15,8 +15,8 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.350
-Release:	%mkrel 3
+Version:	1.360
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -38,9 +38,6 @@ Source13:	webmin-48.png
 Source14:	webmin.pam-new
 # (gc) have the updates; this needs to change for each version and/or release, see
 #      http://www.webmin.com/webmin/updates.html
-# (eandry) -- 2 updates for 1.290 as of Fri Jul 14 14:00:00 CEST 2006
-Source20:	http://www.webmin.com/updates/mailboxes-1.290-3.wbm.gz
-Source21:	http://www.webmin.com/updates/mysql-1.290-2.wbm.gz
 # Other Themes
 Source51:	http://www.gehrigal.net/download/webmin_theme/webmin-theme_gehrigal_0.41.wbt
 # the configurator for this theme
@@ -102,7 +99,7 @@ LOGIN TO "https://localhost:10000/" AND NOT "http://localhost:10000/".
 
 %prep
 
-%setup -q -a 2 -a 20 -a 21 -a 30 -a 51 -a 52 -a 53 -a 55 -a 56
+%setup -q -a2 -a30 -a51 -a52 -a53 -a55 -a56
 # Unknow extension, rpm won't unpack it.
 tar xf %{SOURCE54}
 tar xf %{SOURCE541}
