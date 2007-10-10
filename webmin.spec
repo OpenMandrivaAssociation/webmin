@@ -15,8 +15,8 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.360
-Release:	%mkrel 2
+Version:	1.370
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -52,7 +52,7 @@ Source56:	http://www.bvan.f2s.com/ldap_browser_LDAPapi.wbm
 Source57:	http://prdownloads.sourceforge.net/netatalk/netatalk.wbm
 Source99:	webmin-scripts-i18n.tar.bz2
 Source100:	webmin-i18n-%{i18n_date}.tar.bz2
-Patch0:		webmin-1.020-fix-configs.patch
+Patch0:		webmin-fix-configs.diff
 Patch1:		webmin-1.100-remove-atboot-problem
 Patch5:		webmin-fix-newmods.patch
 Patch7:		webmin-0.85-never-fail-detect-os.patch
@@ -245,7 +245,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{name}
 Comment=%{summary}
-Exec="%{_bindir}/www-browser https://localhost:10000/"
+Exec=%{_bindir}/www-browser https://localhost:10000/
 Icon=%{name}
 Terminal=false
 Type=Application
