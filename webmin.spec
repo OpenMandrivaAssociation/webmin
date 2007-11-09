@@ -15,7 +15,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.370
+Version:	1.380
 Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
@@ -70,7 +70,7 @@ Patch26:	webmin-1.060-mysql-fix-installing-missing-packages.patch
 Patch29:	webmin-1.100-let-localauth-config.patch
 Patch32:	webmin-1.310-usermin-fix-installing-missing-package.diff
 Patch33:	webmin-1.130-postgresql-fix-installing-missing-packages.patch
-Patch34:	webmin-1.350-support-mandriva.diff
+Patch34:	webmin-support-mandriva.diff
 Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch36:	webmin-1.350-mandriva_theme.diff
 Patch100:	webmin-i18n-%{i18n_date}.patch
@@ -129,7 +129,7 @@ rm -fr %{name}-%{version}/useradmin
 %patch29 -p1
 %patch32 -p0
 %patch33 -p0
-%patch34 -p1
+%patch34 -p0
 %patch35 -p1
 %patch36 -p0
 
