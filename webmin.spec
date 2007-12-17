@@ -83,7 +83,6 @@ Provides:	%{name}-%{version}
 Provides:	%{name}-theme-mandriva
 Obsoletes:	%{name}-theme-mandriva
 BuildArch:	noarch
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 A web-based administration interface for Unix systems. Using Webmin you can
