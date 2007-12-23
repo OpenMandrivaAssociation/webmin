@@ -15,7 +15,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.380
+Version:	1.390
 Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
