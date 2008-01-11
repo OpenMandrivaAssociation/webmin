@@ -229,15 +229,6 @@ install -m 0644 %{SOURCE12} %{buildroot}%{_iconsdir}/webmin.png
 install -m 0644 %{SOURCE11} %{buildroot}%{_liconsdir}/webmin.png
 
 # Menu entry
-mkdir -p %{buildroot}/%{_menudir}
-cat << EOF > %{buildroot}/%{_menudir}/%{name}
-?package(%{name}): needs="x11" \
-section="System/Configuration" \
-title="Configure Your Computer (Expert)" \
-command="%{_bindir}/www-browser https://localhost:10000/" \
-icon="%{name}.png" \
-xdg="true"
-EOF
 												 
 # XDG menu
 install -d %{buildroot}%{_datadir}/applications
@@ -284,7 +275,6 @@ rm -rf %{buildroot}
 /usr/bin/%{name}
 %dir %{_sysconfdir}/ssl/webmin
 %config(noreplace) %{_sysconfdir}/ssl/webmin/miniserv.pem
-%{_menudir}/%{name}
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
