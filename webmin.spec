@@ -258,7 +258,6 @@ fi
 
 %postun
 if [ "$1" = 0 ]; then
-    grep root=/usr/share/webmin /etc/webmin/miniserv.conf >/dev/null 2>&1
     rm -rf /etc/webmin /var/webmin /var/lib/webmin /var/run/webmin /var/log/webmin
 fi
 %clean_menus
