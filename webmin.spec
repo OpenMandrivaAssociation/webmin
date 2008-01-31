@@ -9,7 +9,7 @@
 %define _enable_debug_packages %{nil}
 %define debug_package          %{nil}
 
-%define i18n_date 20070604
+%define i18n_date 20080131
 %define with_i18n_tarball 1
 %define with_i18n_patch 1
 
