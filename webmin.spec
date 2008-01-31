@@ -229,7 +229,7 @@ install -m 0644 %{SOURCE12} %{buildroot}%{_iconsdir}/webmin.png
 install -m 0644 %{SOURCE11} %{buildroot}%{_liconsdir}/webmin.png
 
 # Menu entry
-												 
+
 # XDG menu
 install -d %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
