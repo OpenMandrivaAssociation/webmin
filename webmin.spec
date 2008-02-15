@@ -1,9 +1,6 @@
-
 # zero out some useless deps.
-#%%define _requires_exceptions perl(Webmin\\|\\|libc.so.1\\|libintl.so.3\\|libnsl.so.1\\|libsecdb.so.1\\|libsocket.so.1
-#%%define _provides_exceptions perl(Webmin\\|perl(Authen::SolarisRBAC)
-%undefine __find_provides
-%undefine __find_requires
+# (tv) we'd better had a link in minicom & package Encode::HanConvert:
+%define _requires_exceptions HanConvert\\|runscript
 
 # don't spend time with this either
 %define _enable_debug_packages %{nil}
@@ -16,7 +13,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.390
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -242,6 +239,8 @@ Terminal=false
 Type=Application
 Categories=X-MandrivaLinux-System-Configuration-Other;Settings;
 EOF
+
+rm -fr %buildroot/usr/share/webmin/acl/Authen-SolarisRBAC-0.1
 
 %post
 if [ "$1" != 0 ]; then
