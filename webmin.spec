@@ -13,7 +13,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.390
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -71,6 +71,7 @@ Patch34:	webmin-support-mandriva.diff
 Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch36:	webmin-1.350-mandriva_theme.diff
 Patch100:	webmin-i18n-%{i18n_date}.patch
+Patch101:	webmin-1.390-fix-login-utf8.patch
 Requires(pre): rpm-helper
 Requires:	perl
 Requires:	perl-CGI
@@ -163,6 +164,7 @@ tar -jxf %{SOURCE100}
 %if %{with_i18n_patch}
 %patch100 -p1
 %endif
+%patch101 -p1
 
 %build
 
