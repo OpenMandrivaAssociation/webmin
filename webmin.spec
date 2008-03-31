@@ -12,7 +12,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.400
+Version:	1.410
 Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
