@@ -252,10 +252,10 @@ fi
 /usr/share/webmin/postinstall.sh
 %_post_service webmin
 [[ -n $need_restart ]] && service webmin start >/dev/null 2>/dev/null || :
+%update_menus
 
 %preun
 %_preun_service webmin
-%update_menus
 
 %postun
 if [ "$1" = 0 ]; then
