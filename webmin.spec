@@ -252,7 +252,9 @@ fi
 /usr/share/webmin/postinstall.sh
 %_post_service webmin
 [[ -n $need_restart ]] && service webmin start >/dev/null 2>/dev/null || :
+%if %mdkversion < 200900
 %update_menus
+%endif
 
 %preun
 %_preun_service webmin
@@ -261,7 +263,9 @@ fi
 if [ "$1" = 0 ]; then
     rm -rf /etc/webmin /var/webmin /var/lib/webmin /var/run/webmin /var/log/webmin
 fi
+%if %mdkversion < 200900
 %clean_menus
+%endif
 
 %clean
 rm -rf %{buildroot}
