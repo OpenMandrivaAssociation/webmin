@@ -13,7 +13,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.441
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -72,6 +72,7 @@ Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch36:	webmin-1.350-mandriva_theme.diff
 Patch100:	webmin-i18n-%{i18n_date}.patch
 Patch101:	webmin-1.390-fix-login-utf8.patch
+Patch102:	webmin-useradmin-use-md5.patch
 Requires(pre): rpm-helper
 Requires:	perl
 Requires:	perl-CGI
@@ -112,8 +113,8 @@ rm -fr %{name}-%{version}/useradmin
 %patch0 -p0
 %patch1 -p1
 %patch5 -p0
-%patch7 -p0
-%patch8 -p0
+%patch7 -p1
+%patch8 -p1
 #%patch9 -p1
 %patch13 -p0
 %patch15 -p0
@@ -123,13 +124,15 @@ rm -fr %{name}-%{version}/useradmin
 #%patch22 -p1
 %patch23 -p1
 %patch24 -p1
-%patch26 -p0
+%patch26 -p1
 %patch29 -p1
 %patch32 -p0
-%patch33 -p0
+%patch33 -p1
 %patch34 -p0
 %patch35 -p1
 %patch36 -p0
+# use MD5 by default
+%patch102 -p1
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-9.0; do n=`echo $i | perl -pe 's/...$/9.1/'`; [ -e $n ] || cp $i $n; done
