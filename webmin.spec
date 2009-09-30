@@ -12,8 +12,8 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.441
-Release:	%mkrel 2
+Version:	1.490
+Release:	%mkrel 1
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -33,6 +33,7 @@ Source12:	webmin-32.png
 Source13:	webmin-48.png
 # uses include instead of pam_stack
 Source14:	webmin.pam-new
+Source15:	webmin.logrotate
 # (gc) have the updates; this needs to change for each version and/or release, see
 #      http://www.webmin.com/webmin/updates.html
 # Other Themes
@@ -147,7 +148,9 @@ find bind8 -type f -maxdepth 1 | xargs perl -pi -e 's|/var/run/named\.pid|/var/r
 cp config-mandrake-linux config-mandriva-linux
 
 # force theme to blue
-( cd theme_gehrigal; sh change_skin_blue.sh )
+pushd theme_gehrigal/skins
+  ./change_skin.pl s blueedition.skininfo
+popd
 
 perl -pi -e 's|redhat-linux(?! mandriva-linux)|redhat-linux mandriva-linux| if $_ =~ /^os_support.*redhat-linux/ && $_ !~ /mandriva-linux/' */module.info
 
@@ -210,9 +213,9 @@ done
 
 echo "rpm" > %{buildroot}/usr/share/webmin/install-type
 
-# fix SSL cert location
-mkdir -p %{buildroot}%{_sysconfdir}/ssl/webmin
-mv -f %{buildroot}%{_datadir}/webmin/miniserv.pem %{buildroot}%{_sysconfdir}/ssl/webmin
+## fix SSL cert location
+#mkdir -p %{buildroot}%{_sysconfdir}/ssl/webmin
+#mv -f %{buildroot}%{_datadir}/webmin/miniserv.pem %{buildroot}%{_sysconfdir}/ssl/webmin
 
 # (sb) remove development file
 rm -f %{buildroot}/usr/share/webmin/mount/macos-mounts.c
@@ -245,9 +248,14 @@ Type=Application
 Categories=X-MandrivaLinux-System-Configuration-Other;Settings;
 EOF
 
-rm -fr %buildroot/usr/share/webmin/acl/Authen-SolarisRBAC-0.1
+rm -fr %{buildroot}/usr/share/webmin/acl/Authen-SolarisRBAC-0.1
+
+#logrotate
+install -d %{buildroot}%{_sysconfdir}/logrotate.d
+install -m 0644 %{SOURCE15} %{buildroot}%{_sysconfdir}/logrotate.d/webmin
 
 %post
+%_create_ssl_certificate -b miniserv
 if [ "$1" != 0 ]; then
     service webmin status >/dev/null 2>/dev/null && need_restart=1
     service webmin stop >/dev/null 2>/dev/null
@@ -278,10 +286,11 @@ rm -rf %{buildroot}
 %doc README LICENCE
 %{_initrddir}/webmin
 %config(noreplace) %{_sysconfdir}/pam.d/webmin
+%config(noreplace) %{_sysconfdir}/logrotate.d/webmin
 /usr/share/webmin
 /usr/bin/%{name}
-%dir %{_sysconfdir}/ssl/webmin
-%config(noreplace) %{_sysconfdir}/ssl/webmin/miniserv.pem
+#dir %{_sysconfdir}/ssl/webmin
+#config(noreplace) %{_sysconfdir}/ssl/webmin/miniserv.pem
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
