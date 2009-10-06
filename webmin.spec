@@ -3,8 +3,8 @@
 %define _requires_exceptions HanConvert\\|runscript
 
 # don't spend time with this either
-%define _enable_debug_packages %{nil}
-%define debug_package          %{nil}
+%define _enable_debug_packages	%{nil}
+%define debug_package		%{nil}
 
 %define i18n_date 20080131
 %define with_i18n_tarball 1
@@ -13,7 +13,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.490
-Release:	%mkrel 1
+Release:	%mkrel 3
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -71,6 +71,8 @@ Patch33:	webmin-1.130-postgresql-fix-installing-missing-packages.patch
 Patch34:	webmin-support-mandriva.diff
 Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch36:	webmin-1.350-mandriva_theme.diff
+Patch37:	webmin-temp-permission-fix.diff
+Patch38:	webmin-ssldir-cosmetic.diff
 Patch100:	webmin-i18n-%{i18n_date}.patch
 Patch101:	webmin-1.390-fix-login-utf8.patch
 Patch102:	webmin-useradmin-use-md5.patch
@@ -105,8 +107,8 @@ tar xf %{SOURCE54}
 tar xf %{SOURCE541}
 tar xf %{SOURCE57}
 
-install -m 0644 %{_sourcedir}/advanced.png mandriva/webmin/images
-install -m 0644 %{_sourcedir}/descs.png mandriva/webmin/images
+install -m 0644 %{SOURCE33} mandriva/webmin/images
+install -m 0644 %{SOURCE34} mandriva/webmin/images
 rm -fr %{name}-%{version}/dhcpd
 rm -fr %{name}-%{version}/useradmin
 
@@ -132,6 +134,8 @@ rm -fr %{name}-%{version}/useradmin
 %patch34 -p0
 %patch35 -p1
 %patch36 -p0
+%patch37 -p1
+%patch38 -p1
 # use MD5 by default
 %patch102 -p1
 
