@@ -13,7 +13,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.490
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -134,7 +134,7 @@ rm -fr %{name}-%{version}/useradmin
 %patch34 -p0
 %patch35 -p1
 %patch36 -p0
-%patch37 -p1
+#%patch37 -p1
 %patch38 -p1
 # use MD5 by default
 %patch102 -p1
