@@ -13,7 +13,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.490
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -73,8 +73,9 @@ Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch36:	webmin-1.350-mandriva_theme.diff
 Patch37:	webmin-temp-permission-fix.diff
 Patch38:	webmin-ssldir-cosmetic.diff
+Patch39:	webmin-fix-bandwith.diff
+Patch40:	webmin-fix-sarg.diff
 Patch100:	webmin-i18n-%{i18n_date}.patch
-Patch101:	webmin-1.390-fix-login-utf8.patch
 Patch102:	webmin-useradmin-use-md5.patch
 Requires(pre): rpm-helper
 Requires:	perl
@@ -134,8 +135,10 @@ rm -fr %{name}-%{version}/useradmin
 %patch34 -p0
 %patch35 -p1
 %patch36 -p0
-#%patch37 -p1
+%patch37 -p1
 %patch38 -p1
+%patch39 -p1
+%patch40 -p1
 # use MD5 by default
 %patch102 -p1
 
@@ -157,7 +160,7 @@ pushd theme_gehrigal/skins
 popd
 
 perl -pi -e 's|redhat-linux(?! mandriva-linux)|redhat-linux mandriva-linux| if $_ =~ /^os_support.*redhat-linux/ && $_ !~ /mandriva-linux/' */module.info
-
+#'
 perl -pi -e 's|/etc/smb\.conf|/etc/samba/smb\.conf|' samba/config-mandrake-linux
 
 (find . -name '*.cgi' ; find . -name '*.pl') | perl perlpath.pl /usr/bin/perl -
@@ -174,7 +177,6 @@ tar -jxf %{SOURCE100}
 %if %{with_i18n_patch}
 %patch100 -p1
 %endif
-%patch101 -p1
 
 %build
 
@@ -216,10 +218,6 @@ for i in /usr/share/webmin/caldera/images/letters/254.gif /usr/share/webmin/i4lc
 done
 
 echo "rpm" > %{buildroot}/usr/share/webmin/install-type
-
-## fix SSL cert location
-#mkdir -p %{buildroot}%{_sysconfdir}/ssl/webmin
-#mv -f %{buildroot}%{_datadir}/webmin/miniserv.pem %{buildroot}%{_sysconfdir}/ssl/webmin
 
 # (sb) remove development file
 rm -f %{buildroot}/usr/share/webmin/mount/macos-mounts.c
@@ -297,8 +295,6 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/logrotate.d/webmin
 /usr/share/webmin
 /usr/bin/%{name}
-#dir %{_sysconfdir}/ssl/webmin
-#config(noreplace) %{_sysconfdir}/ssl/webmin/miniserv.pem
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
