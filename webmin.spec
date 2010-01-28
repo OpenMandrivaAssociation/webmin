@@ -10,10 +10,19 @@
 %define with_i18n_tarball 1
 %define with_i18n_patch 1
 
+%if %mandriva_branch == Cooker
+# Cooker
+%define release %mkrel 2
+%else
+# Old distros
+%define subrel 1
+%define release %mkrel 0
+%endif
+
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.500
-Release:	%mkrel 1
+Release:	%{release}
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -257,7 +266,9 @@ install -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -m 0644 %{SOURCE15} %{buildroot}%{_sysconfdir}/logrotate.d/webmin
 
 %post
+%if %mdkversion < 200900
 %_create_ssl_certificate -b miniserv
+%endif
 if [ "$1" != 0 ]; then
     service webmin status >/dev/null 2>/dev/null && need_restart=1
     service webmin stop >/dev/null 2>/dev/null
