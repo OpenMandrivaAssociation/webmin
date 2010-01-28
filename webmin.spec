@@ -12,7 +12,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 2
+%define release %mkrel 3
 %else
 # Old distros
 %define subrel 1
@@ -271,7 +271,7 @@ install -m 0644 %{SOURCE15} %{buildroot}%{_sysconfdir}/logrotate.d/webmin
 %endif
 if [ "$1" != 0 ]; then
     service webmin status >/dev/null 2>/dev/null && need_restart=1
-    service webmin stop >/dev/null 2>/dev/null
+    service webmin stop >/dev/null 2>/dev/null || :
 else
     [[ -e /etc/cron.allow ]] && if [ "x`grep root /etc/cron.allow`" == "x" ] ; then
 	echo root >> /etc/cron.allow
