@@ -266,7 +266,7 @@ install -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -m 0644 %{SOURCE15} %{buildroot}%{_sysconfdir}/logrotate.d/webmin
 
 %post
-%if %mdkversion < 200900
+%if %mdkversion > 200900
 %_create_ssl_certificate -b miniserv
 %endif
 if [ "$1" != 0 ]; then
