@@ -12,7 +12,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 3
+%define release %mkrel 1
 %else
 # Old distros
 %define subrel 1
@@ -21,7 +21,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.500
+Version:	1.510
 Release:	%{release}
 License:	BSD
 Group:		System/Configuration/Other
@@ -77,15 +77,12 @@ Patch26:	webmin-1.060-mysql-fix-installing-missing-packages.patch
 Patch29:	webmin-1.100-let-localauth-config.patch
 Patch32:	webmin-1.310-usermin-fix-installing-missing-package.diff
 Patch33:	webmin-1.130-postgresql-fix-installing-missing-packages.patch
-Patch34:	webmin-support-mandriva.diff
 Patch35:	webmin-1.220-usermin-fix-index.patch
 Patch36:	webmin-1.350-mandriva_theme.diff
 Patch37:	webmin-temp-permission-fix.diff
 Patch38:	webmin-ssldir-cosmetic.diff
 Patch39:	webmin-fix-bandwith.diff
 Patch40:	webmin-fix-sarg.diff
-Patch100:	webmin-i18n-%{i18n_date}.patch
-Patch102:	webmin-useradmin-use-md5.patch
 Requires(pre): rpm-helper
 Requires:	perl
 Requires:	perl-CGI
@@ -141,7 +138,6 @@ rm -fr %{name}-%{version}/useradmin
 %patch29 -p1
 %patch32 -p0
 %patch33 -p1
-%patch34 -p0
 %patch35 -p1
 %patch36 -p0
 %patch37 -p1
@@ -149,7 +145,6 @@ rm -fr %{name}-%{version}/useradmin
 %patch39 -p1
 %patch40 -p1
 # use MD5 by default
-%patch102 -p1
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-9.0; do n=`echo $i | perl -pe 's/...$/9.1/'`; [ -e $n ] || cp $i $n; done
@@ -182,9 +177,6 @@ find -name ".xvpics" -o -name ".*.swp" | xargs rm -rf
 %if %{with_i18n_tarball}
 #tar -jxf %{_sourcedir}/webmin-i18n-%{i18n_date}.tar.bz2
 tar -jxf %{SOURCE100}
-%endif
-%if %{with_i18n_patch}
-%patch100 -p1
 %endif
 
 %build
