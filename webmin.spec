@@ -120,7 +120,9 @@ rm -fr %{name}-%{version}/dhcpd
 rm -fr %{name}-%{version}/useradmin
 
 %setup -q -D -T -c -a 9 -n %{name}-%{version}
+%if %{mdkversion} < 20101
 %patch0 -p0
+%endif
 %patch1 -p1
 %patch5 -p0
 %patch7 -p1
@@ -223,8 +225,12 @@ echo "rpm" > %{buildroot}/usr/share/webmin/install-type
 # (sb) remove development file
 rm -f %{buildroot}/usr/share/webmin/mount/macos-mounts.c
 
+%if %{mdkversion} < 20101
 # (deush) mandriva is the default theme
 echo 'mandriva' > %{buildroot}%{_datadir}/webmin/defaulttheme
+%else
+echo 'blue-theme' > %{buildroot}%{_datadir}/webmin/defaulttheme
+%endif
 
 # (oe) remove invalid file that breaks webmin
 rm -f %{buildroot}%{_datadir}/webmin/mandriva/config.cgi
