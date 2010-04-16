@@ -12,7 +12,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 2
+%define release %mkrel 3
 %else
 # Old distros
 %define subrel 1
@@ -130,7 +130,7 @@ rm -fr %{name}-%{version}/useradmin
 #%patch9 -p1
 %patch13 -p0
 %patch15 -p0
-%patch17 -p1
+#%patch17 -p1
 %patch19 -p0
 %patch21 -p0
 #%patch22 -p1
