@@ -12,7 +12,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 4
+%define release %mkrel 5
 %else
 # Old distros
 %define subrel 1
@@ -65,6 +65,8 @@ Patch5:		webmin-fix-newmods.patch
 Patch7:		webmin-0.85-never-fail-detect-os.patch
 Patch8:		webmin-0.85-enable-changed-theme-at-installation.patch
 Patch9:		webmin-1.510-fix-status-in-init.patch
+Patch10:	webmin-1.510-fix-os-list.patch
+
 Patch13:	webmin-openldap.patch
 Patch15:	webmin-fix-netatalk-paths.patch
 Patch17:	webmin-1.220-remove-mandrakestuff-from-init.patch
@@ -128,6 +130,8 @@ rm -fr %{name}-%{version}/useradmin
 %patch7 -p1
 %patch8 -p1
 %patch9 -p0
+%patch10 -p1
+
 %patch13 -p0
 %patch15 -p0
 #%patch17 -p1
