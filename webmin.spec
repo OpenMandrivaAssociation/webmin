@@ -12,7 +12,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 5
+%define release %mkrel 1
 %else
 # Old distros
 %define subrel 1
@@ -21,7 +21,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.510
+Version:	1.520
 Release:	%{release}
 License:	BSD
 Group:		System/Configuration/Other
