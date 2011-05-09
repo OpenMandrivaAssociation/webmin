@@ -12,7 +12,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 2
+%define release %mkrel 1
 %else
 # Old distros
 %define subrel 1
@@ -21,7 +21,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.540
+Version:	1.550
 Release:	%{release}
 License:	BSD
 Group:		System/Configuration/Other
@@ -64,7 +64,7 @@ Patch1:		webmin-1.100-remove-atboot-problem
 Patch5:		webmin-fix-newmods.patch
 Patch7:		webmin-0.85-never-fail-detect-os.patch
 Patch8:		webmin-0.85-enable-changed-theme-at-installation.patch
-Patch9:		webmin-1.510-fix-status-in-init.patch
+Patch9:		webmin-1.550-fix-status-in-init.patch
 Patch10:	webmin-1.510-fix-os-list.patch
 
 Patch13:	webmin-openldap.patch
@@ -72,7 +72,6 @@ Patch15:	webmin-fix-netatalk-paths.patch
 Patch17:	webmin-1.220-remove-mandrakestuff-from-init.patch
 Patch19:	webmin-0.92-add-default-configs-logviewer-fp2k.patch
 Patch21:	webmin-0.950-add-netsaint-mandrake-config.patch
-#Patch22: webmin-1.220-fix-logfile-location.patch.bz2
 Patch23:	webmin-1.020-ssl-location.patch
 Patch24:	webmin-1.020-suppress-missing-netatalk-interfaces.patch
 Patch26:	webmin-1.060-mysql-fix-installing-missing-packages.patch
@@ -137,7 +136,6 @@ rm -fr %{name}-%{version}/useradmin
 #%patch17 -p1
 %patch19 -p0
 %patch21 -p0
-#%patch22 -p1
 %patch23 -p1
 %patch24 -p1
 %patch26 -p1
