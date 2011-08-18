@@ -124,7 +124,7 @@ rm -fr %{name}-%{version}/useradmin
 %if %{mdkversion} < 20101
 %patch0 -p0
 %endif
-%patch1 -p1
+%patch1 -p0
 %patch5 -p0
 %patch7 -p1
 %patch8 -p1
