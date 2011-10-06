@@ -21,7 +21,7 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.560
+Version:	1.570
 Release:	%{release}
 License:	BSD
 Group:		System/Configuration/Other
@@ -121,33 +121,33 @@ rm -fr %{name}-%{version}/dhcpd
 rm -fr %{name}-%{version}/useradmin
 
 %setup -q -D -T -c -a 9 -n %{name}-%{version}
-%if %{mdkversion} < 20101
-%patch0 -p0
-%endif
-%patch1 -p0
-%patch5 -p0
-%patch7 -p1
-%patch8 -p1
-%patch9 -p0
-%patch10 -p1
+#%if %{mdkversion} < 20101
+#%patch0 -p0
+#%endif
+#%patch1 -p0
+#%patch5 -p0
+#%patch7 -p1
+#%patch8 -p1
+#%patch9 -p0
+#%patch10 -p1
 
-%patch13 -p0
-%patch15 -p0
+#%patch13 -p0
+#%patch15 -p0
 #%patch17 -p1
-%patch19 -p0
-%patch21 -p0
-%patch23 -p1
-%patch24 -p1
-%patch26 -p1
-%patch29 -p1
-%patch32 -p0
-%patch33 -p1
-%patch35 -p1
-%patch36 -p0
-%patch37 -p1
-%patch38 -p1
-%patch39 -p1
-%patch40 -p1
+#%patch19 -p0
+#%patch21 -p0
+#%patch23 -p1
+#%patch24 -p1
+#%patch26 -p1
+#%patch29 -p1
+#%patch32 -p0
+#%patch33 -p1
+#%patch35 -p1
+#%patch36 -p0
+#%patch37 -p1
+#%patch38 -p1
+#%patch39 -p1
+#%patch40 -p1
 # use MD5 by default
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
@@ -178,10 +178,10 @@ rm -f mount/openbsd-mounts-*
 find -name ".xvpics" -o -name ".*.swp" | xargs rm -rf
 
 # i18n
-%if %{with_i18n_tarball}
+#%if %{with_i18n_tarball}
 #tar -jxf %{_sourcedir}/webmin-i18n-%{i18n_date}.tar.bz2
 tar -jxf %{SOURCE100}
-%endif
+#%endif
 
 %build
 
