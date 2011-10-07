@@ -59,6 +59,8 @@ Source56:	http://www.bvan.f2s.com/ldap_browser_LDAPapi.wbm
 Source57:	http://prdownloads.sourceforge.net/netatalk/netatalk.wbm
 Source99:	webmin-scripts-i18n.tar.bz2
 Source100:	webmin-i18n-%{i18n_date}.tar.bz2
+Source101:	awstats-1.9.wbm
+Source102:	dgwebmin-0.7.1.wbm
 Patch0:		webmin-fix-configs.diff
 Patch1:		webmin-1.100-remove-atboot-problem
 Patch5:		webmin-fix-newmods.patch
@@ -114,6 +116,8 @@ LOGIN TO "https://localhost:10000/" AND NOT "http://localhost:10000/".
 tar xf %{SOURCE54}
 tar xf %{SOURCE541}
 tar xf %{SOURCE57}
+tar xf %{SOURCE101}
+tar xf %{SOURCE102}
 
 install -m 0644 %{SOURCE33} mandriva/webmin/images
 install -m 0644 %{SOURCE34} mandriva/webmin/images
@@ -180,7 +184,7 @@ find -name ".xvpics" -o -name ".*.swp" | xargs rm -rf
 # i18n
 #%if %{with_i18n_tarball}
 #tar -jxf %{_sourcedir}/webmin-i18n-%{i18n_date}.tar.bz2
-tar -jxf %{SOURCE100}
+#tar -jxf %{SOURCE100}
 #%endif
 
 %build
