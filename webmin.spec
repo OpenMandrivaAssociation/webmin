@@ -274,9 +274,9 @@ install -m 0644 %{SOURCE15} %{buildroot}%{_sysconfdir}/logrotate.d/webmin
 %_create_ssl_certificate -b miniserv
 %else
 # fix SSL cert location
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/ssl/webmin
-mv -f $RPM_BUILD_ROOT%{_datadir}/webmin/miniserv.pem \
-  $RPM_BUILD_ROOT%{_sysconfdir}/ssl/webmin
+mkdir -p %{buildroot}%{_sysconfdir}/ssl/webmin
+mv -f %{buildroot}%{_datadir}/webmin/miniserv.pem \
+  %{buildroot}%{_sysconfdir}/ssl/webmin
 %endif
 if [ "$1" != 0 ]; then
     service webmin status >/dev/null 2>/dev/null && need_restart=1
