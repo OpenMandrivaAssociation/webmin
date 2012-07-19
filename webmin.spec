@@ -21,12 +21,12 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.580
+Version:	1.590
 Release:	%{release}
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
-Source0:	http://heanet.dl.sourceforge.net/sourceforge/webadmin/%{name}-%{version}.tar.gz
+Source0:	http://heanet.dl.sourceforge.net/project/webadmin/%{name}/%{version}/%{name}-%{version}.tar.gz
 Source2:	other.modules.tar.bz2
 Source30:	webmin-mandriva-theme.tar.bz2
 # some images were missing
