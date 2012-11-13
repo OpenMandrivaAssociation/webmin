@@ -1,0 +1,17 @@
+--- mandriva/index.cgi	2005-09-06 19:20:42.000000000 +0200
++++ mandriva/index.cgi.oden	2007-07-08 11:57:15.000000000 +0200
+@@ -64,10 +64,13 @@
+ 	foreach $m (@modules) {
+ 		next if ($m->{'category'} ne $in{'cat'});
+ 
++		my $icon="$m->{'dir'}/images/icon.png";
++		if (not -e "$theme_root_directory/$m->{'dir'}/images/icon.png") {$icon = "/$m->{'dir'}/images/icon.gif"; }
++
+ 		if ($pos % $cols == 0) { print "<tr>\n"; }
+ 		print "<td valign=top align=center width=$per\%>\n";
+ 		print "<table border=0><tr><td><a href=$m->{'dir'}/>",
+-		      "<img src=$m->{'dir'}/images/icon.png alt=\"\" border=0></a>",
++		      "<img src=$icon alt=\"\" border=0></a>",
+ 		      "</td></tr></table>\n";
+ 		print "<a href=$m->{'dir'}/><font face=\"helvetica\" color=#FFFFFF>$m->{'desc'}</font></a></td>\n";
+ 		if ($pos++ % $cols == $cols - 1) { print "</tr>\n"; }

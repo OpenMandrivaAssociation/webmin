@@ -1,0 +1,24 @@
+--- init/init-lib.pl.orig	2011-08-04 09:09:54.000000000 +0200
++++ init/init-lib.pl	2011-08-18 12:34:14.234398572 +0200
+@@ -1745,7 +1745,7 @@
+ sub action_running
+ {
+ my ($file) = @_;
+-my $out = &backquote_command("$file status");
++my $out = &backquote_command("$file status >/dev/null");
+ if ($out =~ /not\s+running/i ||
+     $out =~ /no\s+server\s+running/i) {
+ 	return 0;
+@@ -1756,6 +1756,12 @@
+ elsif ($out =~ /stopped/i) {
+ 	return 0;
+ 	}
++elsif ($out =~ /^0\s*$/) {
++	return 1;
++}
++elsif ($out =~ /^\d+\s*$/) {
++	return 0;
++}
+ return -1;
+ }
+ 

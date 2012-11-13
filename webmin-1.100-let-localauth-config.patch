@@ -1,0 +1,10 @@
+--- webmin-1.100/setup.sh.deush	2003-12-05 20:11:24.000000000 +0100
++++ webmin-1.100/setup.sh	2003-12-05 20:14:53.000000000 +0100
+@@ -520,6 +520,7 @@
+ 	fi
+ 	chmod 600 $kfile
+ 	echo "keyfile=/etc/pki/tls/private/miniserv.pem" >> $cfile
++	echo "localauth=/usr/sbin/lsof" >> $cfile
+ 
+ 	chmod 600 $cfile
+ 	echo "..done"

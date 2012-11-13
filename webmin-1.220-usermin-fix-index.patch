@@ -1,0 +1,11 @@
+--- webmin-1.220/usermin/index.cgi.deush	2005-08-24 12:28:09.000000000 +0200
++++ webmin-1.220/usermin/index.cgi	2005-08-24 12:28:44.000000000 +0200
+@@ -26,7 +26,7 @@
+ 	             "the graphical program <tt>rpmdrake</tt> or the commandline program\n".
+ 		     "<tt>urpmi usermin</tt>. Then, re-load this page.\n";
+ 	}
+-		}
++	
+ 	&ui_print_footer("/", $text{'index'});
+ 	exit;
+ 	}

@@ -1,0 +1,23 @@
+diff -p -up webmin-1.441/oschooser.pl.osdetect webmin-1.441/oschooser.pl
+--- webmin-1.441/oschooser.pl.osdetect	2008-10-27 18:07:42.000000000 -0200
++++ webmin-1.441/oschooser.pl	2009-04-09 16:28:42.000000000 -0300
+@@ -48,9 +48,16 @@ if ($auto) {
+ 
+ 	if (!$ver) {
+ 		if ($auto == 1) {
+-			# Failed .. give up
+-			print "Failed to detect operating system\n";
+-			exit 1;
++#			# Failed .. give up
++#			print "Failed to detect operating system\n";
++#			exit 1;
++#
++#               ######### (gc) Do not give up but use the latest release of Mandrakelinux
++		    foreach $o (@list) {
++			$ver = $o
++			    if ($o->[0] eq "Mandrakelinux" && (!$ver || $ver->[1] < $o->[1]));
++		    }
++		    print "WARNING: could not guess OS, falling back to $ver->[0] version $ver->[1]\n";
+ 			}
+ 		elsif ($auto == 3) {
+ 			# Do we have a tty?

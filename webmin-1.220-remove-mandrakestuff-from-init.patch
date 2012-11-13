@@ -1,0 +1,34 @@
+--- webmin-1.220/init/init-lib.pl.deush	2005-07-20 21:06:28.410126659 +0200
++++ webmin-1.220/init/init-lib.pl	2005-07-20 21:08:45.984436969 +0200
+@@ -96,6 +96,7 @@
+ return sort(@rv);
+ }
+ 
++sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
+ 
+ =head2 list_actions
+ 
+@@ -60,15 +61,14 @@
+ $dir = $config{init_dir};
+ opendir(DIR, $dir);
+ foreach $f (sort { lc($a) cmp lc($b) } readdir(DIR)) {
+-	if ($f eq "." || $f eq ".." || $f =~ /\.bak$/ || $f eq "functions" ||
+-	    $f eq "core" || $f eq "README" || $f eq "rc" || $f eq "rcS" ||
+-	    -d "$dir/$f" || $f =~ /\.swp$/ || $f eq "skeleton" ||
+-	    $f =~ /\.lock$/ || $f =~ /\.dpkg-(old|dist)$/ ||
+-	    $f =~ /^\.depend\./) { next; }
+-	if (@stbuf = stat("$dir/$f")) {
+-		push(@rv, "$f $stbuf[1]");
+-		}
+-	}
++    next if (member($f, qw(. .. functions core README rc rcS skeleton))
++	     || $f =~ /\.bak$/ || $f =~ /\.swp$/ || $f =~ /\.lock$/
++	     || $f =~ /^mandrake/ || $f =~ /^\.depend\./
++	     || -d "$dir/$f");
++    if (@stbuf = stat("$dir/$f")) {
++	push(@rv, "$f $stbuf[1]");
++    }
++}
+ closedir(DIR);
+ foreach $f (split(/\s+/, $config{'extra_init'})) {
+ 	if (@stbuf = stat($f)) {

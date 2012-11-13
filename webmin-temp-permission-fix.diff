@@ -1,0 +1,24 @@
+diff -u webmin-1.490.orig/maketemp.pl webmin-1.490/maketemp.pl
+--- webmin-1.490.orig/maketemp.pl	2009-09-17 18:21:36.000000000 +0200
++++ webmin-1.490/maketemp.pl	2009-10-15 14:30:53.000000000 +0200
+@@ -5,7 +5,7 @@
+ 
+ while($tries++ < 10) {
+ 	local @st = lstat($tmp_dir);
+-	exit(0) if ($st[4] == $< && (-d _) && ($st[2] & 0777) == 0755);
++	exit(0) if ($st[4] == $< && (-d _));
+ 	if (@st) {
+ 		unlink($tmp_dir) || rmdir($tmp_dir) ||
+ 			system("/bin/rm -rf ".quotemeta($tmp_dir));
+diff -u webmin-1.490.orig/web-lib-funcs.pl webmin-1.490/web-lib-funcs.pl
+--- webmin-1.490.orig/web-lib-funcs.pl	2009-09-17 18:21:35.000000000 +0200
++++ webmin-1.490/web-lib-funcs.pl	2009-10-15 16:58:22.000000000 +0200
+@@ -212,7 +212,7 @@
+ 	my $tries = 0;
+ 	while($tries++ < 10) {
+ 		my @st = lstat($tmp_dir);
+-		last if ($st[4] == $< && (-d _) && ($st[2] & 0777) == 0755);
++		last if ($st[4] == $< && (-d _));
+ 		if (@st) {
+ 			unlink($tmp_dir) || rmdir($tmp_dir) ||
+ 				system("/bin/rm -rf ".quotemeta($tmp_dir));

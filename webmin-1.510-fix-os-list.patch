@@ -1,0 +1,11 @@
+--- webmin-1.510/os_list.txt.orig	2010-07-11 08:10:29.000000000 +0200
++++ webmin-1.510/os_list.txt	2010-07-11 08:12:50.000000000 +0200
+@@ -138,7 +138,7 @@
+ 
+ # Mandriva Corporate
+ Mandrake Linux Corporate Server	$i	mandrake-linux	$i	$etc_issue =~ /Mandrake\s+Linux\s+Corporate\s+Server\s+release\s+([0-9\.]+)/i
+-Mandriva Linux Enterprise Server	5.0	mandrake-linux	2009	$etc_issue =~ /Mandriva\s+Linux\s+Enterprise\s+Server\s+release\s+5\.0\s+\(Official\)\s+for\s+(i586|x86_64)/i
++Mandriva Linux Enterprise Server	$1	mandrake-linux	2009	$etc_issue =~ /Mandriva\s+Linux\s+Enterprise\s+Server\s+release\s+(\d\.\d)\s+\(Official\)\s+for\s+(i586|x86_64)/i
+ 
+ # Conectiva Linux (now subsumed into Mandrake?)
+ Conectiva Linux			3.0	redhat-linux	5.2	$etc_issue =~ /Conectiva.*Linux.*3\.0/i

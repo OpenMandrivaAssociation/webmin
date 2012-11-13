@@ -1,0 +1,8 @@
+--- webmin-1.490.orig/sarg/config	2009-09-17 18:21:53.000000000 +0200
++++ webmin-1.490/sarg/config	2009-10-15 12:09:55.000000000 +0200
+@@ -1,4 +1,4 @@
+ sarg=sarg
+-sarg_conf=/usr/local/sarg/sarg.conf
++sarg_conf=/etc/sarg/sarg.conf
+ clear=1
+ naked=0

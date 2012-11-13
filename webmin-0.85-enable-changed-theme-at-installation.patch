@@ -1,0 +1,17 @@
+diff -p -up webmin-1.441/setup.sh.theme webmin-1.441/setup.sh
+--- webmin-1.441/setup.sh.theme	2009-04-09 16:28:14.000000000 -0300
++++ webmin-1.441/setup.sh	2009-04-09 16:28:58.000000000 -0300
+@@ -672,6 +672,13 @@ else
+ 		echo "referers_none=1" >>$config_dir/config
+ 	fi
+ fi
++theme_value=`grep "^theme=" $config_dir/config | sed -e 's/theme=//g'`
++if [ -n "$theme_value" ]; then
++	root_value=`grep "^root=" $config_dir/miniserv.conf | sed -e 's/root=//g'`
++	echo "A theme is configured, updating miniserv config file (theme is $theme_value)"
++	echo "preroot=$root_value/$theme_value" >> $config_dir/miniserv.conf
++fi
++
+ echo $ver > $config_dir/version
+ echo "..done"
+ echo ""

@@ -1,0 +1,20 @@
+--- ./setup.sh.gege	2002-10-08 16:44:57.000000000 +0200
++++ ./setup.sh	2002-10-08 16:46:17.000000000 +0200
+@@ -454,7 +454,7 @@
+ 	chmod 600 $ufile
+ 	echo "userfile=$ufile" >> $cfile
+ 
+-	kfile=$config_dir/miniserv.pem
++	kfile=/etc/pki/tls/private/miniserv.pem
+ 	openssl version >/dev/null 2>&1
+ 	if [ "$?" = "0" ]; then
+ 		# We can generate a new SSL key for this host
+@@ -477,7 +477,7 @@
+ 		cp "$wadir/miniserv.pem" $kfile
+ 	fi
+ 	chmod 600 $kfile
+-	echo "keyfile=$config_dir/miniserv.pem" >> $cfile
++	echo "keyfile=/etc/pki/tls/private/miniserv.pem" >> $cfile
+ 
+ 	chmod 600 $cfile
+ 	echo "..done"

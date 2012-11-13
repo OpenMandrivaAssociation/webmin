@@ -1,0 +1,15 @@
+--- ./netsaint/config-mandrake-linux.gege	Thu Jan  1 01:00:00 1970
++++ ./netsaint/config-mandrake-linux	Sun Mar 31 18:49:06 2002
+@@ -0,0 +1,12 @@
++icons_per_row=4
++main_config=/etc/netsaint/netsaint.cfg
++host_config=/etc/netsaint/hosts.cfg
++cgi_config=/etc/netsaint/nscgi.cfg
++output_url=
++sort_hosts=1
++sort_contacts=1
++sort_commands=1
++list_commands_detailed=1
++sort_timeperiods=1
++sort_services=1
++show_logo=1

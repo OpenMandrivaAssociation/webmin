@@ -1,0 +1,19 @@
+--- webmin-1.490/setup.sh.temp-permissions	2009-10-06 12:06:22.000000000 +0200
++++ webmin-1.490/setup.sh	2009-10-06 12:07:16.000000000 +0200
+@@ -758,11 +759,11 @@
+ 	chmod -R og-rw $config_dir/$m
+ done
+ # Make miniserv config files non-world-readable
+-for f in miniserv.conf miniserv.pem miniserv.users; do
+-	chown -R root $config_dir/$f
+-	chgrp -R bin $config_dir/$f
+-	chmod -R og-rw $config_dir/$f
+-done
++#for f in miniserv.conf miniserv.pem miniserv.users; do
++#	chown -R root $config_dir/$f
++#	chgrp -R bin $config_dir/$f
++#	chmod -R og-rw $config_dir/$f
++#done
+ chmod +r $config_dir/version
+ if [ "$nochown" = "" ]; then
+ 	# Make program directory non-world-writable, but executable

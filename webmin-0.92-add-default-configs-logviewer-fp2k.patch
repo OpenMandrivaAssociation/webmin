@@ -1,0 +1,35 @@
+--- ./fp2k/config.gege	Mon Feb 25 23:13:00 2002
++++ ./fp2k/config	Mon Feb 25 23:12:51 2002
+@@ -0,0 +1,5 @@
++httpd_conf=/etc/httpd/conf/httpd.conf
++fpsrvadm=/usr/local/frontpage/version4.0/bin/fpsrvadm.exe
++fp_dir=/usr/local/frontpage
++frontpg_cnf=/usr/local/frontpage/version4.0/frontpg.cnf
++htaccess=.htaccess
+--- ./fp2k/config.info.gege	Mon Feb 25 23:14:56 2002
++++ ./fp2k/config.info	Mon Feb 25 23:14:52 2002
+@@ -0,0 +1,5 @@
++httpd_conf=Path to Apache configuration file,0
++fpsrvadm=Path to frontage Server Administration executable,0
++fp_dir=Path to frontpage,0
++frontpg_cnf=Path to frontpage configuration file,0
++htaccess=htaccess hidden file,0
+--- ./fp2k/index.cgi.gege	Mon Feb 25 23:07:05 2002
++++ ./fp2k/index.cgi	Mon Feb 25 23:13:32 2002
+@@ -17,7 +17,7 @@
+ ####################################################################
+ # header
+ #
+-&header($text{'index_title'}, "");
++&header($text{'index_title'}, "", undef, 1);
+ print "<hr>";
+ 
+ ####################################################################
+--- ./logviewer/config.gege	Mon Feb 25 23:14:08 2002
++++ ./logviewer/config	Mon Feb 25 23:14:08 2002
+@@ -0,0 +1,5 @@
++live_tail_ttl=0.3
++restart_interval=2
++logs=/usr/bin/w,/usr/bin/uptime,/bin/dmesg,/usr/bin/last,/usr/bin/vmstat 1,/var/log/httpd/access_log,/var/log/httpd/error_log,/var/log/auth.log,/var/log/cfengine.log,/var/log/daemon.log,/var/log/messages,/var/log/kern.log,/var/log/lastlog,/var/log/lpr/errors,/var/log/lpr/info,/var/log/lpr/warnings,/var/log/debug,/var/log/mail/errors,/var/log/mail/info,/var/log/mail/warnings,/var/log/nmb,/var/log/smb,/var/log/setuid.changes,/var/log/setuid.today,/var/log/setuid.yesterday,/var/log/ppp.log,/var/log/syslog,/var/log/squid/access.log,/var/log/squid/cache.log,/var/log/squid/store.log,/var/log/user.log,/var/log/uucp.log,/var/log/wtmp.report,/var/log/xdm.log,/var/log/xntpd
++refresh_interval=5
++last_bytes_to_display=1024

@@ -1,0 +1,11 @@
+--- ./newmods.pl.gege	Wed Oct  4 19:07:36 2000
++++ ./newmods.pl	Wed Oct  4 19:07:52 2000
+@@ -3,7 +3,7 @@
+ # <config directory> <module>+
+ 
+ for($i=1; $i<@ARGV; $i++) {
+-	if (!(-d "$ARGV[0]/$ARGV[$i]")) {
++	if (-d "$ARGV[0]/$ARGV[$i]") {
+ 		push(@new, $ARGV[$i]);
+ 		}
+ 	}

@@ -1,0 +1,15 @@
+--- webmin-1.020/netatalk/index.cgi.ppc	2002-11-16 11:13:53.000000000 -0500
++++ webmin-1.020/netatalk/index.cgi	2002-11-16 11:14:44.000000000 -0500
+@@ -94,9 +94,9 @@
+ 
+ print"<h3>$text{index_global}</h3>\n";
+ 
+-my @links = ("servers.cgi","edit_interfaces.cgi","show_users.cgi", "misc_opt.cgi");
+-my @titles = ($text{'index_server'},$text{'index_interfaces'},$text{'index_users'},$text{'index_misc'});
+-my @icons = ("images/what.gif","images/interface.gif","images/procs.gif","images/icon_4.gif");
++my @links = ("servers.cgi","show_users.cgi", "misc_opt.cgi");
++my @titles = ($text{'index_server'},$text{'index_users'},$text{'index_misc'});
++my @icons = ("images/what.gif","images/procs.gif","images/icon_4.gif");
+ icons_table(\@links, \@titles, \@icons);
+ print"<br>\n";
+ 

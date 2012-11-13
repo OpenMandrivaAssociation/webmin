@@ -1,0 +1,25 @@
+diff -p -up webmin-1.441/postgresql/index.cgi.postgresql webmin-1.441/postgresql/index.cgi
+--- webmin-1.441/postgresql/index.cgi.postgresql	2009-04-09 16:28:14.000000000 -0300
++++ webmin-1.441/postgresql/index.cgi	2009-04-09 16:29:43.000000000 -0300
+@@ -280,15 +280,15 @@ else {
+ 	# Check if the optional perl modules are installed
+ 	if (&foreign_available("cpan")) {
+ 		eval "use DBI";
+-		push(@needs, "DBI") if ($@);
++		push(@needs, "perl-DBI") if ($@);
+ 		$nodbi++ if ($@);
+ 		eval "use DBD::Pg";
+-		push(@needs, "DBD::Pg") if ($@);
++		push(@needs, "perl-DBD-Pg") if ($@);
+ 		if (@needs) {
+-			$needs = &urlize(join(" ", @needs));
+-			print "<center><b>",&text(@needs == 2 ? 'index_nomods' : 'index_nomod', @needs,
+-				"/cpan/download.cgi?source=3&cpan=$needs&mode=2&return=/$module_name/&returndesc=".&urlize($text{'index_return'})),
+-				"</b></center>\n";
++		    print "<center><b>Warning, the following package(s) are missing from your system\n".
++		          "for reliable access to your PostgreSQL database: <tt>@needs</tt>. To install them,\n".
++			  "you may use the graphical program <tt>rpmdrake</tt> or the commandline program\n".
++			  "<tt>urpmi</tt>. Then, re-load this page.\n";
+ 			}
+ 		}
+ 	}
