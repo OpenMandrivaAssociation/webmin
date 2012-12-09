@@ -1,0 +1,46 @@
+#!/usr/bin/perl -w
+# Copyright (C) 2001 Daouda Lo <daouda@mandrakesoft.com> ;) 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use POSIX;
+
+my $browser = $ENV{'BROWSER'};
+my $link = 'https://localhost:10000/';
+my $initscript = '/etc/rc.d/init.d/webmin';
+
+if (!$browser) {
+    print "Webmin is a web server. You need to use a browser, but I could\n";
+    print "not find your default browser in your environment variables.\n";
+    print "Example: export BROWSER=mozilla\n";
+    exit(-1);
+}
+
+if (!-x $initscript) {
+    print "Installation problem. Please reinstall.\n";
+    exit(-1);
+}
+
+my $status = system("$initscript status > /dev/null") >> 8;
+if ($status == 3) {
+    system($initscript, 'start');
+    $status = system("$initscript status > /dev/null") >> 8;
+}
+if ($status != 0) {
+    print "Installation problem. Please reinstall.\n";
+    exit(-1);
+}
+
+print "Launching `$browser' with param `$link'\n";
+system("$browser $link > /dev/null 2> /dev/null &");

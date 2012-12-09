@@ -1,0 +1,23 @@
+/var/log/webmin/miniserv.error {
+    notifempty
+    missingok
+    postrotate
+	[ -f /var/run/webmin/miniserv.pid ] && kill -HUP `cat /var/run/webmin/miniserv.pid` > /dev/null 2>&1 || :
+    endscript
+}
+
+/var/log/webmin/miniserv.log {
+    notifempty
+    missingok
+    postrotate
+	[ -f /var/run/webmin/miniserv.pid ] && kill -HUP `cat /var/run/webmin/miniserv.pid` > /dev/null 2>&1 || :
+    endscript
+}
+
+/var/log/webmin/webmin.log {
+    notifempty
+    missingok
+    postrotate
+	[ -f /var/run/webmin/miniserv.pid ] && kill -HUP `cat /var/run/webmin/miniserv.pid` > /dev/null 2>&1 || :
+    endscript
+}

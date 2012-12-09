@@ -1,6 +1,10 @@
 # zero out some useless deps.
 # (tv) we'd better had a link in minicom & package Encode::HanConvert:
+%if %{_use_internal_dependency_generator}
+%define __noautoreq '/sbin/runscript|perl\\(Encode::HanConvert\\)|perl\\(Win32::Daemon\\)|perl\\(\\)'
+%else
 %define _requires_exceptions HanConvert\\|runscript
+%endif
 
 # don't spend time with this either
 %define _enable_debug_packages	%{nil}
@@ -10,23 +14,16 @@
 %define with_i18n_tarball 1
 %define with_i18n_patch 1
 
-%if %mandriva_branch == Cooker
-# Cooker
-%define release %mkrel 1
-%else
-# Old distros
-%define subrel 1
-%define release %mkrel 1
-%endif
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.600
-Release:	%{release}
+Release:	2
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
 Source0:	http://heanet.dl.sourceforge.net/project/webadmin/%{name}/%{version}/%{name}-%{version}.tar.gz
+Source1:	%{name}.rpmlintrc
 Source2:	other.modules.tar.bz2
 Source30:	webmin-mandriva-theme.tar.bz2
 # some images were missing
@@ -95,7 +92,6 @@ Provides:	%{name}-%{version}
 Provides:	%{name}-theme-mandriva
 Obsoletes:	%{name}-theme-mandriva
 BuildArch:	noarch
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 A web-based administration interface for Unix systems. Using Webmin you can
@@ -125,34 +121,6 @@ rm -fr %{name}-%{version}/dhcpd
 rm -fr %{name}-%{version}/useradmin
 
 %setup -q -D -T -c -a 9 -n %{name}-%{version}
-#%if %{mdkversion} < 20101
-#%patch0 -p0
-#%endif
-#%patch1 -p0
-#%patch5 -p0
-#%patch7 -p1
-#%patch8 -p1
-#%patch9 -p0
-#%patch10 -p1
-
-#%patch13 -p0
-#%patch15 -p0
-#%patch17 -p1
-#%patch19 -p0
-#%patch21 -p0
-#%patch23 -p1
-#%patch24 -p1
-#%patch26 -p1
-#%patch29 -p1
-#%patch32 -p0
-#%patch33 -p1
-#%patch35 -p1
-#%patch36 -p0
-#%patch37 -p1
-#%patch38 -p1
-#%patch39 -p1
-#%patch40 -p1
-# use MD5 by default
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-9.0; do n=`echo $i | perl -pe 's/...$/9.1/'`; [ -e $n ] || cp $i $n; done
@@ -181,15 +149,7 @@ rm -f mount/openbsd-mounts-*
 
 find -name ".xvpics" -o -name ".*.swp" | xargs rm -rf
 
-# i18n
-#%if %{with_i18n_tarball}
-#tar -jxf %{_sourcedir}/webmin-i18n-%{i18n_date}.tar.bz2
-#tar -jxf %{SOURCE100}
-#%endif
-
 %build
-
-# nothing to do here...
 
 %install
 rm -rf %{buildroot}
@@ -211,12 +171,7 @@ install -m755 %{SOURCE4} %{buildroot}/usr/share/webmin/postinstall.sh
 install -m755 %{SOURCE5} %{buildroot}/usr/bin
 
 mkdir -p %{buildroot}/%{_sysconfdir}/pam.d
-
-%if %{mdkversion} < 200610 
-install -m755 %{SOURCE10} %{buildroot}/%{_sysconfdir}/pam.d/webmin
-%else
 install -m755 %{SOURCE14} %{buildroot}/%{_sysconfdir}/pam.d/webmin
-%endif
 
 rm -rf %{buildroot}/usr/share/webmin/*/{CVS,*/CVS}
 rm -f `find %{buildroot} -type f -name .cvsignore`
@@ -231,12 +186,7 @@ echo "rpm" > %{buildroot}/usr/share/webmin/install-type
 # (sb) remove development file
 rm -f %{buildroot}/usr/share/webmin/mount/macos-mounts.c
 
-%if %{mdkversion} < 20101
-# (deush) mandriva is the default theme
-echo 'mandriva' > %{buildroot}%{_datadir}/webmin/defaulttheme
-%else
 echo 'blue-theme' > %{buildroot}%{_datadir}/webmin/defaulttheme
-%endif
 
 # (oe) remove invalid file that breaks webmin
 rm -f %{buildroot}%{_datadir}/webmin/mandriva/config.cgi
@@ -269,15 +219,12 @@ rm -fr %{buildroot}/usr/share/webmin/acl/Authen-SolarisRBAC-0.1
 install -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -m 0644 %{SOURCE15} %{buildroot}%{_sysconfdir}/logrotate.d/webmin
 
+# Drop SVN internal files
+rm -rf %{buildroot}%{_datadir}/%{name}/dansguardian/*/.svn
+
 %post
-%if %mdkversion > 200900
 %_create_ssl_certificate -b miniserv
-%else
-# fix SSL cert location
-mkdir -p %{buildroot}%{_sysconfdir}/ssl/webmin
-mv -f %{buildroot}%{_datadir}/webmin/miniserv.pem \
-  %{buildroot}%{_sysconfdir}/ssl/webmin
-%endif
+
 if [ "$1" != 0 ]; then
     service webmin status >/dev/null 2>/dev/null && need_restart=1
     service webmin stop >/dev/null 2>/dev/null || :
@@ -289,9 +236,6 @@ fi
 /usr/share/webmin/postinstall.sh
 %_post_service webmin
 [[ -n $need_restart ]] && service webmin start >/dev/null 2>/dev/null || :
-%if %mdkversion < 200900
-%update_menus
-%endif
 
 %preun
 %_preun_service webmin
@@ -300,12 +244,6 @@ fi
 if [ "$1" = 0 ]; then
     rm -rf /etc/webmin /var/webmin /var/lib/webmin /var/run/webmin /var/log/webmin
 fi
-%if %mdkversion < 200900
-%clean_menus
-%endif
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root, 0755)
@@ -313,9 +251,16 @@ rm -rf %{buildroot}
 %{_initrddir}/webmin
 %config(noreplace) %{_sysconfdir}/pam.d/webmin
 %config(noreplace) %{_sysconfdir}/logrotate.d/webmin
-/usr/share/webmin
-/usr/bin/%{name}
+%{_datadir}/%{name}
+%{_bindir}/%{name}
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_datadir}/applications/*.desktop
+
+
+%changelog
+* Thu Jul 19 2012 Lonyai Gergely <aleph@mandriva.org> 1.590-1mdv2012.0
++ Revision: 810266
+- 1.590
+
