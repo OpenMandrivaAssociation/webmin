@@ -120,6 +120,10 @@ install -m 0644 %{SOURCE34} mandriva/webmin/images
 rm -fr %{name}-%{version}/dhcpd
 rm -fr %{name}-%{version}/useradmin
 
+# remove some unwanted binaries
+rm -fr mount/macos-mounts
+rm -fr mount/macos-mounts-intel
+
 %setup -q -D -T -c -a 9 -n %{name}-%{version}
 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
