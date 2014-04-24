@@ -17,8 +17,8 @@
 
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
-Version:	1.600
-Release:	4
+Version:	1.680
+Release:	2
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -87,7 +87,7 @@ Requires(pre): rpm-helper
 Requires:	perl
 Requires:	perl-CGI
 Requires:	lsof
-Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net-SSLeay perl-Authen-PAM
+Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net_SSLeay perl-Authen-PAM
 Provides:	%{name}-%{version}
 Provides:	%{name}-theme-mandriva
 Obsoletes:	%{name}-theme-mandriva
@@ -119,10 +119,6 @@ install -m 0644 %{SOURCE33} mandriva/webmin/images
 install -m 0644 %{SOURCE34} mandriva/webmin/images
 rm -fr %{name}-%{version}/dhcpd
 rm -fr %{name}-%{version}/useradmin
-
-# remove some unwanted binaries
-rm -fr mount/macos-mounts
-rm -fr mount/macos-mounts-intel
 
 %setup -q -D -T -c -a 9 -n %{name}-%{version}
 
