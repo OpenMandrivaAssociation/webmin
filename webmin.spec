@@ -87,7 +87,7 @@ Requires(pre): rpm-helper
 Requires:	perl
 Requires:	perl-CGI
 Requires:	lsof
-Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net_SSLeay perl-Authen-PAM
+Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net-SSLeay perl-Authen-PAM
 Provides:	%{name}-%{version}
 Provides:	%{name}-theme-mandriva
 Obsoletes:	%{name}-theme-mandriva
