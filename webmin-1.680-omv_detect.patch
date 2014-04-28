@@ -1,0 +1,11 @@
+--- webmin-1.680/os_list.txt	2014-03-11 18:40:34.000000000 +0000
++++ webmin-1.680/os_list.txt	2014-04-28 12:40:28.099602160 +0100
+@@ -163,7 +163,7 @@
+ pclinuxos Linux			2008	mandrake-linux	10.4	`cat /etc/mandrake-release 2>/dev/null` =~ /PCLinuxOS\s+release\s+2008/i
+ pclinuxos Linux			2009	mandrake-linux	10.5	`cat /etc/mandrake-release 2>/dev/null` =~ /PCLinuxOS\s+release\s+2009/i
+ Mageia Linux			$1	mandrake-linux	2011	`cat /etc/mageia-release 2>/dev/null` =~ /Mageia\s+release\s+(\d+)/i
+-
++OpenMandriva Lx			$1	mandrake-linux	2011	`cat /etc/distro-release 2>/dev/null` =~ /OpenMandriva\sLx\srelease\s+(\d+\.\d+)/i
+ # Mandrake Linux
+ Mandrake Linux			5.3	redhat-linux	5.0	$etc_issue =~ /Mandrake\s+release\s+5\.3/i
+ Mandrake Linux			6.0	redhat-linux	6.0	$etc_issue =~ /Mandrake\s+release\s+6\.0/i
