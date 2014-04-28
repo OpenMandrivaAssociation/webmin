@@ -18,7 +18,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.680
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -31,7 +31,7 @@ Source33:	advanced.png
 Source34:	descs.png
 Source4:	webmin-postinstallscript.sh
 Source5:	webmin
-Source6:	webmin.initscript
+Source6:	webmin.service
 Source9:	http://www.openit.it/index.php/openit_en/content/download/2474/10171/file/openvpn-2.0.wbm.gz
 Source10:	webmin.pam
 Source11:	webmin-16.png
@@ -83,6 +83,7 @@ Patch37:	webmin-temp-permission-fix.diff
 Patch38:	webmin-ssldir-cosmetic.diff
 Patch39:	webmin-fix-bandwith.diff
 Patch40:	webmin-fix-sarg.diff
+Patch41:	webmin-1.680-omv_detect.patch
 Requires(pre): rpm-helper
 Requires:	perl
 Requires:	perl-CGI
@@ -122,6 +123,7 @@ rm -fr %{name}-%{version}/useradmin
 
 %setup -q -D -T -c -a 9 -n %{name}-%{version}
 
+%patch41 -p1 
 for i in */config-mandrake-linux-8.2; do n=`echo $i | perl -pe 's/...$/9.0/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-9.0; do n=`echo $i | perl -pe 's/...$/9.1/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-9.1; do n=`echo $i | perl -pe 's/...$/9.2/'`; [ -e $n ] || cp $i $n; done
@@ -156,7 +158,7 @@ rm -rf %{buildroot}
 
 # IMPORTANT: there is no %{_datadir} and so on, since the directories are decided by the post install script.
 mkdir -p %{buildroot}/usr/share/webmin
-mkdir -p %{buildroot}/%{_initrddir}
+mkdir -p %{buildroot}/%{_unitdir}
 mkdir -p %{buildroot}/usr/bin
 
 find -type f -print0 | xargs -0 chmod a+r
@@ -166,7 +168,7 @@ find -type d -print0 | xargs -0 chmod a+rx
 rm -rf ldap
 
 cp -a * %{buildroot}/usr/share/webmin
-install -m755 %{SOURCE6} %{buildroot}/%{_initrddir}/webmin
+install -m755 %{SOURCE6} %{buildroot}/%{_unitdir}
 install -m755 %{SOURCE4} %{buildroot}/usr/share/webmin/postinstall.sh
 install -m755 %{SOURCE5} %{buildroot}/usr/bin
 
@@ -248,7 +250,7 @@ fi
 %files
 %defattr(-, root, root, 0755)
 %doc README LICENCE
-%{_initrddir}/webmin
+%{_unitdir}/webmin.service
 %config(noreplace) %{_sysconfdir}/pam.d/webmin
 %config(noreplace) %{_sysconfdir}/logrotate.d/webmin
 %{_datadir}/%{name}
