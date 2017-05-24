@@ -18,7 +18,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.840
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -84,7 +84,7 @@ Patch38:	webmin-ssldir-cosmetic.diff
 Patch39:	webmin-fix-bandwith.diff
 Patch40:	webmin-fix-sarg.diff
 Patch41:	webmin-1.680-omv_detect.patch
-Requires(pre): rpm-helper
+Requires(pre): rpm-helper openssl
 Requires:	perl
 Requires:	perl-CGI
 Requires:	lsof
