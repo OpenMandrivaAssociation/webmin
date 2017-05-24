@@ -259,10 +259,3 @@ fi
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_datadir}/applications/*.desktop
-
-
-%changelog
-* Thu Jul 19 2012 Lonyai Gergely <aleph@mandriva.org> 1.590-1mdv2012.0
-+ Revision: 810266
-- 1.590
-
