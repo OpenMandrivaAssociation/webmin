@@ -88,7 +88,7 @@ Requires(pre): rpm-helper openssl
 Requires:	perl
 Requires:	perl-CGI
 Requires:	perl(JSON::PP)
-Requires:	(Encode::Detect)
+Requires:	perl(Encode::Detect)
 Requires:	lsof
 Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net-SSLeay perl-Authen-PAM
 Provides:	%{name}-%{version}
