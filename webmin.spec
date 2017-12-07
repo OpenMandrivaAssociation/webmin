@@ -18,7 +18,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.840
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
@@ -87,6 +87,8 @@ Patch41:	webmin-1.680-omv_detect.patch
 Requires(pre): rpm-helper openssl
 Requires:	perl
 Requires:	perl-CGI
+Requires:	perl(JSON::PP)
+Requires:	(Encode::Detect)
 Requires:	lsof
 Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net-SSLeay perl-Authen-PAM
 Provides:	%{name}-%{version}
@@ -131,6 +133,8 @@ for i in */config-mandrake-linux-9.2; do n=`echo $i | perl -pe 's/...$/10.0/'`; 
 for i in */config-mandrake-linux-10.0; do n=`echo $i | perl -pe 's/....$/10.1/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-10.1; do n=`echo $i | perl -pe 's/....$/10.2/'`; [ -e $n ] || cp $i $n; done
 for i in */config-mandrake-linux-10.2; do n=`echo $i | perl -pe 's/....$/2006.0/'`; [ -e $n ] || cp $i $n; done
+
+rm -rf JSON
 find bind8 -type f -maxdepth 1 | xargs perl -pi -e 's|/var/run/named\.pid|/var/run/named/named.pid|'
 
 # daouda: added mandriva-linux to known OS
@@ -154,7 +158,6 @@ find -name ".xvpics" -o -name ".*.swp" | xargs rm -rf
 %build
 
 %install
-rm -rf %{buildroot}
 
 # IMPORTANT: there is no %{_datadir} and so on, since the directories are decided by the post install script.
 mkdir -p %{buildroot}/usr/share/webmin
