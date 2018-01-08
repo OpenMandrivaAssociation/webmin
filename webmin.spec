@@ -1,8 +1,7 @@
 # zero out some useless deps.
 # (tv) we'd better had a link in minicom & package Encode::HanConvert:
 %define __noautoreq '/sbin/runscript|perl\\(Encode::HanConvert\\)|perl\\(Win32::Daemon\\)|perl\\(\\)'
-
-%define __noautoprov '^perl\\(.*\\)'
+%define __noautoprov 'perl\\(File::BaseDir\\)|perl\\(File::Basename\\)|perl\\(File::MimeInfo\\)|perl\\(JSON\\)|perl\\(JSON::Backend::PP\\)|perl\\(JSON::Boolean\\)'
 
 # don't spend time with this either
 %define _enable_debug_packages	%{nil}
@@ -16,7 +15,7 @@
 Summary:	An SSL web-based administration interface for Unix systems
 Name:		webmin
 Version:	1.840
-Release:	4
+Release:	6
 License:	BSD
 Group:		System/Configuration/Other
 URL:		http://www.webmin.com/webmin/
