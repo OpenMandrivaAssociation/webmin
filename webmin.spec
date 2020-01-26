@@ -89,8 +89,8 @@ Requires:	perl(Encode::Detect)
 Requires:	lsof
 Requires(pre): sed chkconfig findutils coreutils initscripts grep perl-Net-SSLeay perl-Authen-PAM
 Provides:	%{name}-%{version}
-Provides:	%{name}-theme-mandriva
-Obsoletes:	%{name}-theme-mandriva
+Provides:	%{name}-theme-mandriva-1
+Obsoletes:	%{name}-theme-mandriva-2
 BuildArch:	noarch
 
 %description
