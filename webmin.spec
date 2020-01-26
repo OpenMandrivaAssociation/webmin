@@ -248,7 +248,7 @@ fi
 
 %files
 %defattr(-, root, root, 0755)
-%doc README LICENCE
+%doc LICENCE
 %{_unitdir}/webmin.service
 %config(noreplace) %{_sysconfdir}/pam.d/webmin
 %config(noreplace) %{_sysconfdir}/logrotate.d/webmin
