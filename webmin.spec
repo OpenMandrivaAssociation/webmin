@@ -18,7 +18,7 @@ Version:	1.996
 Release:	2
 License:	BSD
 Group:		System/Configuration/Other
-URL:		http://www.webmin.com/webmin/
+URL:		https://www.webmin.com/webmin/
 Source0:	http://prdownloads.sourceforge.net/webadmin/%{name}-%{version}.tar.gz
 Source1:	%{name}.rpmlintrc
 Source2:	other.modules.tar.bz2
